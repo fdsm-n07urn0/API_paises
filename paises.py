@@ -2,9 +2,9 @@ import json
 import sys
 import requests
 
-# HTTP requests methods -> Connect, delete, get, head, options, patch, post e trace
 URL_ALL = 'https://restcountries.com/v3.1/all'
 URL_NAME = 'https://restcountries.com/v3.1/name'
+
 
 def requisicao(url):
     try:
@@ -14,13 +14,13 @@ def requisicao(url):
     except:
         print('Erro ao fazer requisição em:', url)
 
+        
 def parsing(texto_da_resposta):
     try:
         return json.loads(texto_da_resposta)
     except:
         print('Erro ao fazer parsing')
 
-#paises = json.loads(resposta.text)   # Parsing de Json para python (Tranforma json em objetos do python)
 
 def contagem_de_paises():
     resposta = requisicao(URL_ALL)
@@ -29,10 +29,12 @@ def contagem_de_paises():
         if lista_de_paises:
             return len(lista_de_paises)
 
+        
 def listar_paises(lista_de_paises):
     for pais in lista_de_paises:
         print(pais['name'])
 
+        
 def mostrar_populacao(nome_do_pais):
     resposta = requisicao('{}/{}'.format(URL_NAME, nome_do_pais))
     if resposta:
@@ -43,6 +45,7 @@ def mostrar_populacao(nome_do_pais):
     else:
         print('Pais não encontrado')
 
+        
 def mostrar_moedas(nome_do_pais):
     resposta = requisicao('{}/{}'.format(URL_NAME, nome_do_pais))
     if resposta:
@@ -56,6 +59,7 @@ def mostrar_moedas(nome_do_pais):
     else:
         print('Pais não encontrado')
 
+        
 def ler_nome_do_pais():
     try:
         nome_do_pais = sys.argv[2]
@@ -83,38 +87,4 @@ if __name__ == '__main__':
                 mostrar_populacao(pais)
         else:
             print('Argumento inválido')
-
-# sys.argv - É usado para acessar argumentos
-# argv - É uma lista de argumentos passada pelo terminal
-
-    #print(sys.argv)
-
-    #mostrar_moedas('brasil')
-    #mostrar_populacao('brasil')
-    #texto_da_resposta = requisicao(URL_ALL)
-    #if texto_da_resposta:
-        #lista_de_paises = parsing(texto_da_resposta)
-        #if lista_de_paises:
-            #listar_paises(lista_de_paises)
-            #print(contagem_de_paises(texto_depois_do_parsing))
-            #print(texto_depois_do_parsing)
-
-
-#print(len(paises))
-#for pais in paises:
-    #print(pais['name'], pais['idd'])
-    #print(pais['idd'])
-    #print(pais['translations'])
-    #print(pais['name'])
-    #print(pais)
-
-#print(paises)
-#print(type(paises[0]))
-#print(paises[0])
-#print(paises[0]['name'])
-#print(paises[-1]['name'])
-#print(type(paises))
-#print(resposta.text)
-#print(resposta)
-#print(resposta.status_code)
-#print(type(resposta))
+            
